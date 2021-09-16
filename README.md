@@ -6,13 +6,11 @@ Minimalist library to emit and receive custom events. `useEvents` will be automa
 ```jsx
 import {emitEvents, useEvents} from '@utsubo/events'
 
-emitEvent((payload) => {
-  // payload = 5
-})
+emitEvent('hello', 5)
 
 
 const DummyComponent = () => {
-  useEvents((payload) => {
+  useEvents('hello', (payload) => {
     // payload = 5
   }, {once: false})
 
