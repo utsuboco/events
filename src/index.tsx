@@ -7,6 +7,23 @@ interface optionsType {
 
 const eventEmitter = new EventEmitter()
 
+// vanilla
+const onEvent = (eventName: string, handler: any, options: optionsType = {}) => {
+  const { once } = options
+  if (once) {
+    eventEmitter.once(eventName, handler)
+  } else {
+    eventEmitter.on(eventName, handler)
+  }
+}
+
+// vanilla
+const offEvent = (eventName: string, handler: any, options: optionsType = {}) => {
+  const { once } = options
+  eventEmitter.removeListener(eventName, handler, null, once ? true : false)
+}
+
+// react hook
 const useEvent = (eventName: string, handler: any, options: optionsType = {}) => {
   const savedHandler = useRef<any>(null)
   const { once } = options
@@ -24,7 +41,7 @@ const useEvent = (eventName: string, handler: any, options: optionsType = {}) =>
       eventEmitter.on(eventName, eventListener)
     }
     return () => {
-      eventEmitter.off(eventName, eventListener, null, once ? true : false)
+      eventEmitter.removeListener(eventName, eventListener, null, once ? true : false)
     }
   }, [eventName, once])
 }
@@ -33,4 +50,4 @@ const emitEvent = (eventName: string, payload: any) => {
   eventEmitter.emit(eventName, payload)
 }
 
-export { emitEvent, useEvent }
+export { emitEvent, useEvent, onEvent, offEvent }

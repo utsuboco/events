@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { emitEvent, useEvent } from '../src/index'
+import { emitEvent, useEvent, onEvent, offEvent } from '../src/index'
+
+const vanillaEvent = (e) => console.log(`%c vanilla too get ${e}`, 'background: #fff; color: orange; padding:  7px 14px; font-weight: bold')
+onEvent('test', vanillaEvent)
 
 function ThingGreen() {
   useEffect(() => {
@@ -15,7 +18,10 @@ function ThingGreen() {
   // if component is mounted it will listen for changes
   // otherwise remove the event listener
   return (
-    <mesh position-x={-3} onClick={(e) => emitEvent('test', 0)}>
+    <mesh position-x={-3} onClick={(e) => {
+        offEvent('test', vanillaEvent)
+        emitEvent('test', 0)
+      }}>
       <sphereBufferGeometry args={[0.75]} />
       <meshNormalMaterial />
     </mesh>

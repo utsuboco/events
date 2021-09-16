@@ -1,6 +1,6 @@
 {
   "name": "@utsubo/events",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Renaud Rohlinger <rohlinger@utsubo.co> (https://utsubo.co)",
   "license": "MIT",
   "description": "react library for custom events",
