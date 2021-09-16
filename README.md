@@ -1,6 +1,6 @@
 # @utsubo/events
 
-Minimalist library to emit and receive custom events. `useEvents` will be automatically attached on mounted and detached on unmounted.
+Minimalist library to emit and receive custom events. `useEvents` will automatically attach events when mounted and detach them when unmounted.
 
 
 ```jsx
