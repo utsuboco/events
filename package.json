@@ -1,6 +1,6 @@
 {
   "name": "@utsubo/events",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Renaud Rohlinger <rohlinger@utsubo.co> (https://utsubo.co)",
   "license": "MIT",
   "description": "react library for custom events",
@@ -38,7 +38,6 @@
     "vite": "^2.5.4"
   },
   "dependencies": {
-    "eventemitter3": "^4.0.7",
-    "react": ">=17.0"
+    "eventemitter3": "^4.0.7"
   }
 }
