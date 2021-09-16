@@ -1,5 +1,8 @@
 # @utsubo/events
 
+```bash
+yarn add @utsubo/events
+```
 Minimalist library to emit and receive custom events. `useEvent` will automatically attach events when mounted and detach them when unmounted.
 
 
