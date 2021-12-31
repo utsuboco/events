@@ -27,7 +27,7 @@ const offEvent = (eventName: string, handler: any, options: optionsType = {}) =>
 }
 
 // react hook
-const useEvent = (eventName: string, handler: any, options: optionsType = {}) => {
+const useEvent = (eventName: string, handler: any, deps: [], options: optionsType = {}) => {
   const savedHandler = useRef<any>(null)
   const { once } = options
 
@@ -46,7 +46,7 @@ const useEvent = (eventName: string, handler: any, options: optionsType = {}) =>
     return () => {
       eventEmitter.removeListener(eventName, eventListener, context, once ? true : false)
     }
-  }, [eventName, once])
+  }, [eventName, once, ...deps])
 }
 
 const emitEvent = (eventName: string, payload: any) => {
