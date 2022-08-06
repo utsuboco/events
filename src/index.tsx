@@ -3,6 +3,7 @@ import EventEmitter from 'eventemitter3'
 
 interface optionsType {
   once?: boolean,
+  prepend?: boolean,
   context?: any
 }
 
@@ -11,11 +12,19 @@ const eventEmitter = new EventEmitter()
 // vanilla
 const onEvent = (eventName: string, handler: any, options: optionsType = {}) => {
   let context:any = null
-  const { once } = options
+  const { once, prepend } = options
   if (once) {
-    context = eventEmitter.once(eventName, handler)
+    if(prepend){
+      context = eventEmitter.prependOnceListener(eventName, handler)
+    }else{
+      context = eventEmitter.once(eventName, handler)
+    }
   } else {
-    context = eventEmitter.on(eventName, handler)
+    if(prepend){
+      context = eventEmitter.prependListener(eventName, handler)
+    }else{
+      context = eventEmitter.on(eventName, handler)
+    }
   }
   return context
 }
@@ -29,7 +38,7 @@ const offEvent = (eventName: string, handler: any, options: optionsType = {}) =>
 // react hook
 const useEvent = (eventName: string, handler: any, deps: [], options: optionsType = {}) => {
   const savedHandler = useRef<any>(null)
-  const { once } = options
+  const { once, prepend } = options
 
   useEffect(() => {
     savedHandler.current = handler
@@ -39,9 +48,17 @@ const useEvent = (eventName: string, handler: any, deps: [], options: optionsTyp
     let context:any = null
     const eventListener = (event:any) => savedHandler.current(event)
     if (once) {
-      context = eventEmitter.once(eventName, eventListener)
+      if(prepend){
+        context = eventEmitter.prependOnceListener(eventName, handler)
+      }else{
+        context = eventEmitter.once(eventName, handler)
+      }
     } else {
-      context = eventEmitter.on(eventName, eventListener)
+      if(prepend){
+        context = eventEmitter.prependListener(eventName, handler)
+      }else{
+        context = eventEmitter.on(eventName, handler)
+      }
     }
     return () => {
       eventEmitter.removeListener(eventName, eventListener, context, once ? true : false)
