@@ -46,7 +46,7 @@ const useEvent = (eventName: string, handler: any, deps: [], options: optionsTyp
     return () => {
       eventEmitter.removeListener(eventName, eventListener, context, once ? true : false)
     }
-  }, [eventName, once, ...deps])
+  }, [eventName, once, deps])
 }
 
 const emitEvent = (eventName: string, payload: any) => {

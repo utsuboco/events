@@ -14,7 +14,7 @@ function ThingGreen() {
   // this will too get trigger everytime emitEvent dispatch something
   useEvent('test', (e) => {
     console.log(`%c trigger green on every event received ${e}`, 'background: #fff; color: green; padding:  7px 14px; font-weight: bold')
-  })
+  }, [])
   // if component is mounted it will listen for changes
   // otherwise remove the event listener
   return (
