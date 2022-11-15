@@ -31,7 +31,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "rimraf dist && vite build && tsc",
+    "build": "rimraf dist && vite build",
     "serve": "vite preview"
   },
   "devDependencies": {
