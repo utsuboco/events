@@ -58,6 +58,7 @@ function ThingRed() {
     (e) => {
       console.log(`%c trigger once ${e}`, 'background: #fff; color: orange; padding:  7px 14px; font-weight: bold')
     },
+    [],
     { once: true },
   )
 
