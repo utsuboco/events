@@ -5,7 +5,7 @@ import type { EventHandler, EventOptions } from './types'
 /**
  * React hook for creating a listener for a given event.
  */
-export function useEvent(eventName: string, handler: EventHandler, deps: any[] = [], options: EventOptions = {}): void {
+export function useEvent(eventName: string, handler: EventHandler, deps: any[] = [], options?: EventOptions): void {
   const handlerRef = useRef<EventHandler>(handler)
   useEffect(() => void (handlerRef.current = handler), [handler])
 
@@ -14,5 +14,5 @@ export function useEvent(eventName: string, handler: EventHandler, deps: any[] =
     const context = onEvent(eventName, handler, options)
 
     return () => offEvent(eventName, handler, { ...options, context })
-  }, [eventName, options.once, ...deps])
+  }, [eventName, options?.once, ...deps])
 }
