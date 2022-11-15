@@ -4,18 +4,10 @@
   "author": "Renaud Rohlinger <rohlinger@utsubo.co> (https://utsubo.co)",
   "license": "MIT",
   "description": "react library for custom events. Based on eventemitter3",
-  "types": "./index.d.ts",
-  "main": "./dist/utsubo-events.umd.js",
-  "module": "./dist/utsubo-events.es.js",
   "keywords": [
     "react",
     "events"
   ],
-  "exports": {
-    "require": "./dist/utsubo-events.umd.js",
-    "import": "./dist/utsubo-events.es.js",
-    "default": "./dist/utsubo-events.es.js"
-  },
   "bugs": {
     "url": "https://github.com/utsuboco/events/issues"
   },
@@ -24,29 +16,43 @@
     "url": "git+https://github.com/utsuboco/events"
   },
   "homepage": "https://github.com/utsuboco/events#readme",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "serve": "vite preview"
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "sideEffects": false,
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs"
   },
   "files": [
-    "dist",
-    "index.d.ts"
+    "dist/*",
+    "src/*"
   ],
-  "peerDependencies": {
-    "react": "*"
+  "scripts": {
+    "dev": "vite",
+    "build": "rimraf dist && vite build",
+    "serve": "vite preview"
   },
   "devDependencies": {
     "@react-three/fiber": "^8.7.4",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@vitejs/plugin-react-refresh": "^1.3.6",
-    "path": "^0.12.7",
+    "@vitejs/plugin-react": "^2.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rimraf": "^3.0.2",
+    "three": "^0.146.0",
     "typescript": "^4.8.3",
     "vite": "^3.1.1"
   },
   "dependencies": {
     "eventemitter3": "^4.0.7"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
   }
 }

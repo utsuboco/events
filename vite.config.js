@@ -1,21 +1,38 @@
-import { defineConfig } from "vite";
-import reactRefresh from "@vitejs/plugin-react-refresh";
-import babel from "@rollup/plugin-babel";
-
-const path = require("path");
+import * as path from 'path'
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  plugins: [reactRefresh()],
-  build: {
-    lib: {
-      entry: path.resolve(__dirname, "src/index.tsx"),
-      name: "Utsubo-events",
-      fileName: (format) => `utsubo-events.${format}.js`,
+  root: process.argv[2] ? undefined : 'demo',
+  plugins: [
+    react(),
+    {
+      name: 'vite-tsc',
+      generateBundle() {
+        this.emitFile({ type: 'asset', fileName: 'index.d.ts', source: `export * from '../src'` })
+      },
     },
-    rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled into your library
-      external: ["react"],
-      plugins: [babel({ babelHelpers: "bundled" })],
+  ],
+  resolve: {
+    alias: {
+      '@utsubo/events': path.resolve(__dirname, 'src'),
     },
   },
-});
+  build: {
+    minify: false,
+    sourcemap: true,
+    target: 'es2018',
+    lib: {
+      formats: ['es', 'cjs'],
+      entry: 'src/index.ts',
+      fileName: '[name]',
+    },
+    rollupOptions: {
+      external: (id) => !id.startsWith('.') && !path.isAbsolute(id),
+      output: {
+        preserveModules: true,
+        sourcemapExcludeSources: true,
+      },
+    },
+  },
+})
