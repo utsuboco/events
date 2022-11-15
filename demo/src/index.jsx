@@ -34,7 +34,7 @@ function ThingGreen() {
         emitEvent('test', 0)
       }}
     >
-      <sphereBufferGeometry args={[0.75]} />
+      <sphereGeometry args={[0.75]} />
       <meshNormalMaterial />
     </mesh>
   )
@@ -65,8 +65,8 @@ function ThingRed() {
   return (
     <group>
       <mesh ref={ref} onClick={(e) => emitEvent('test', val.current++)}>
-        <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-        <meshNormalMaterial attach="material" />
+        <boxGeometry />
+        <meshNormalMaterial />
       </mesh>
       {!hideOtherThing && <ThingGreen />}
     </group>
