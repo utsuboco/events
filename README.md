@@ -1,29 +1,28 @@
 # @utsubo/events
 
+Minimalist library to emit and receive custom events.
+
 ```bash
 yarn add @utsubo/events
 ```
-Minimalist library to emit and receive custom events. `useEvent` will automatically attach events when mounted and detach them when unmounted.
 
+## Example
 
-```jsx
-import {emitEvent, useEvent, onEvent, offEvent} from '@utsubo/events'
+```ts
+import { onEvent, offEvent, emitEvent, useEvent } from '@utsubo/events'
 
-emitEvent('hello', 5)
+// Create an event listener
+const handler = (e) => console.log('event', e)
+onEvent('event', handler, { once: false })
 
-const vanillaFunc = (payload) => { console.log(payload) } // = 5
+// Dispatch a payload to event listeners
+emitEvent('event', 'event data')
 
-onEvent('hello', vanillaFunc, {once: false})
-// detach event
-offEvent('hello', vanillaFunc)
+// Remove the event listener
+offEvent('event', handler, { once: false })
 
-
-const DummyComponent = () => {
-  // automatically attached on mount and detached on unmount
-  useEvent('hello', (payload) => {
-    // payload = 5
-  }, {once: false})
-
-  return null
+// React hook bindings to create reactive handlers.
+function Component() {
+  useEvent('event', (e) => console.log('event', e), [key], { once: false })
 }
 ```

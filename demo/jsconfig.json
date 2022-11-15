@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "jsx": "react",
+    "paths": {
+      "@utsubo/events": ["../../src"],
+      "@utsubo/events/*": ["../../src/*"]
+    }
+  }
+}
