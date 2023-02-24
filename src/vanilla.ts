@@ -20,6 +20,6 @@ export function offEvent(eventName: string, handler: EventHandler, options?: Eve
 /**
  * Dispatches a payload to listeners for a given event.
  */
-export function emitEvent(eventName: string, payload: any): void {
+export function emitEvent(eventName: string, payload?: any): void {
   eventEmitter.emit(eventName, payload)
 }
